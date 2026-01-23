@@ -1,0 +1,147 @@
+.container {
+    padding: 4rem 1rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    min-height: 80vh;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 2rem;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.item {
+    display: flex;
+    gap: 1.5rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+}
+
+.itemImage {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    background-color: #fff;
+    border-radius: 0.5rem;
+}
+
+.itemDetails {
+    flex: 1;
+}
+
+.itemName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.itemPrice {
+    font-weight: 700;
+    color: var(--foreground);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.quantityBtn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface-hover);
+    color: var(--foreground);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity {
+    font-weight: 600;
+}
+
+.removeBtn {
+    color: #ef4444;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    margin-left: auto;
+}
+
+.summary {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: var(--radius);
+    height: fit-content;
+}
+
+.summaryTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.total {
+    font-weight: 700;
+    font-size: 1.25rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.checkoutBtn {
+    width: 100%;
+    background-color: var(--primary);
+    color: #000;
+    border: none;
+    padding: 1rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: background-color 0.2s;
+}
+
+.checkoutBtn:hover {
+    background-color: var(--primary-hover);
+}
+
+@media (max-width: 900px) {
+    .content {
+        grid-template-columns: 1fr;
+    }
+}

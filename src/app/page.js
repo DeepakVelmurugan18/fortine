@@ -1,66 +1,98 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import Link from 'next/link';
+import styles from './page.module.css';
+import { products, categories } from '@/lib/data';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+
+function HomeContent() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get('search')?.toLowerCase() || '';
+
+  // Filter products based on search query
+  const filteredProducts = products.filter(p =>
+    p.name.toLowerCase().includes(query) ||
+    p.category.toLowerCase().includes(query)
+  );
+
+  // If searching, show all matches. If not, just show featured (or all for density demo)
+  const displayProducts = query ? filteredProducts : products;
+
+  return (
+    <main className={styles.main}>
+      {/* Show Hero only if not searching */}
+      {!query && (
+        <section className={styles.hero}>
+          <div className={styles.heroContent}>
+            <h1>Elevate Your Living Space</h1>
+            <p>Discover our premium collection of modern furniture and delightful toys.</p>
+            <button className="btn btn-primary">Shop Now</button>
+          </div>
+        </section>
+      )}
+
+      <div className="container">
+        {/* Categories - Hide on search */}
+        {!query && (
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>Shop by Category</h2>
+            <div className={styles.categoryGrid}>
+              {categories.map((cat) => (
+                <Link href={`/category/${cat.id}`} key={cat.id} className={styles.categoryCard}>
+                  <img src={cat.image} alt={cat.name} className={styles.categoryImage} />
+                  <div className={styles.categoryName}>{cat.name}</div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Product Grid */}
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>
+            {query ? `Search Results for "${query}"` : 'Featured Products'}
+          </h2>
+
+          {displayProducts.length > 0 ? (
+            <div className={styles.productGrid}>
+              {displayProducts.map((product) => (
+                <div key={product.id} className={styles.productCard}>
+                  <Link href={`/product/${product.id}`}>
+                    <img src={product.image} alt={product.name} className={styles.productImage} />
+                  </Link>
+                  <div className={styles.productInfo}>
+                    <span className={styles.productCategory}>{product.category}</span>
+                    <Link href={`/product/${product.id}`}>
+                      <h3 className={styles.productName}>{product.name}</h3>
+                    </Link>
+                    <div className={styles.rating}>★ {product.rating}</div>
+                    <div className={styles.priceRow}>
+                      <span className={styles.price}>${product.price}</span>
+                      {/* Simple button for grid, real logic in details */}
+                      <Link href={`/product/${product.id}`}>
+                        <button className={styles.addToCartBtn}>View</button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--muted)' }}>
+              No products found.
+            </div>
+          )}
+        </section>
+      </div>
+    </main>
+  );
+}
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

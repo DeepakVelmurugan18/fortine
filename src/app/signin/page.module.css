@@ -1,0 +1,117 @@
+.container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.formCard {
+    width: 100%;
+    max-width: 350px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    background-color: var(--surface);
+}
+
+.title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputGroup label {
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.input {
+    padding: 0.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+.input:focus {
+    border-color: var(--primary);
+    outline: 3px solid rgba(245, 158, 11, 0.2);
+}
+
+.signInBtn {
+    background-color: var(--primary);
+    color: #000;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.signInBtn:hover {
+    background-color: var(--primary-hover);
+}
+
+.divider {
+    margin: 1.5rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--border);
+}
+
+.divider span {
+    background-color: var(--surface);
+    padding: 0 0.5rem;
+    position: relative;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.socialButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.socialBtn {
+    width: 100%;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    padding: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    transition: background-color 0.2s;
+}
+
+.socialBtn:hover {
+    background-color: var(--surface-hover);
+}
